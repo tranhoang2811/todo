@@ -1,6 +1,12 @@
 import Task from "../models/task.model.js";
 
-const id = req.url.split("/")[2];
+const taskController = {
+  getAllTasks,
+  getTaskById,
+  createTask,
+  updateTask,
+  deleteTask,
+};
 
 function getAllTasks(req, res) {
   Task.find()
@@ -13,6 +19,7 @@ function getAllTasks(req, res) {
 }
 
 function getTaskById(req, res) {
+  const id = req.url.split("/")[2];
   Task.findById(id)
     .then((task) => {
       res.send(task);
@@ -24,6 +31,7 @@ function getTaskById(req, res) {
 
 function createTask(req, res) {
   const task = new Task(req.body);
+  console.log(req.body);
   task
     .save()
     .then((newTask) => {
@@ -35,6 +43,7 @@ function createTask(req, res) {
 }
 
 function updateTask(req, res) {
+  const id = req.url.split("/")[2];
   Task.findByIdAndUpdate({ _id: id }, { $set: req.body })
     .exec()
     .then((task) => {
@@ -46,6 +55,7 @@ function updateTask(req, res) {
 }
 
 function deleteTask(req, res) {
+  const id = req.url.split("/")[2];
   Task.findByIdAndDelete(id)
     .exec()
     .then((task) => {
@@ -56,10 +66,4 @@ function deleteTask(req, res) {
     });
 }
 
-export default {
-  getAllTasks,
-  getTaskById,
-  createTask,
-  updateTask,
-  deleteTask,
-};
+export default taskController;
