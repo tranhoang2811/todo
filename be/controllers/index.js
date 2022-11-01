@@ -1,9 +1,9 @@
-import userController from "./user.controller.js";
-import taskController from "./task.controller.js";
-import projectController from "./project.controller.js";
+import user from "./user.controller.js";
+import task from "./task.controller.js";
+import project from "./project.controller.js";
 
 export default {
-  ...userController,
-  ...taskController,
-  ...projectController,
+  user,
+  task,
+  project,
 };
