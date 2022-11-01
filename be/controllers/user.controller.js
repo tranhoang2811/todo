@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import Jwt from "jsonwebtoken";
+import { handleError } from "../helper.js";
 import crypto from "crypto";
 
 const userController = {

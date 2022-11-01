@@ -1,4 +1,5 @@
 import Task from "../models/task.model.js";
+import { handleError } from "../helper.js";
 
 const taskController = {
   getAllTasks,
@@ -14,18 +15,19 @@ function getAllTasks(req, res) {
       res.send(JSON.stringify(allTasks));
     })
     .catch((err) => {
-      console.log(`Error: ${err}`);
+      handleError(err, "/controller/tasks.controller.js", "getAllTasks");
     });
 }
 
 function getTaskById(req, res) {
-  const id = req.url.split("/")[2];
+  const id = req.params.id;
+  console.log(id);
   Task.findById(id)
     .then((task) => {
       res.send(task);
     })
     .catch((err) => {
-      console.log(`Error: ${err}`);
+      handleError(err, "/controller/tasks.controller.js", "getTaskById");
     });
 }
 
@@ -38,31 +40,31 @@ function createTask(req, res) {
       res.send(newTask);
     })
     .catch((err) => {
-      console.log(`Error: ${err}`);
+      handleError(err, "/controller/tasks.controller.js", "createTask");
     });
 }
 
 function updateTask(req, res) {
-  const id = req.url.split("/")[2];
+  const id = req.params.id;
   Task.findByIdAndUpdate({ _id: id }, { $set: req.body })
     .exec()
     .then((task) => {
       res.send(task);
     })
     .catch((err) => {
-      console.log(`Error: ${err}`);
+      handleError(err, "/controller/tasks.controller.js", "updateTask");
     });
 }
 
 function deleteTask(req, res) {
-  const id = req.url.split("/")[2];
+  const id = req.params.id;
   Task.findByIdAndDelete(id)
     .exec()
     .then((task) => {
       res.send(task);
     })
     .catch((err) => {
-      console.log(`Error: ${err}`);
+      handleError(err, "/controller/tasks.controller.js", "deleteTask");
     });
 }
 
