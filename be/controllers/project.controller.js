@@ -1,5 +1,5 @@
 import Project from "../models/project.model.js";
-import { handleError } from "../helper.js";
+// import { handleError } from "../helper.js";
 
 const projectController = {
   getAllProjects,
