@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import TasksPage from "./pages/TasksPage";
 function App() {
   const [items, setItems] = useState([]);
   const [item, setItem] = useState("");
@@ -34,6 +35,7 @@ function App() {
           return <li key={index}>{value}</li>;
         })}
       </ul>
+      <TasksPage />
     </div>
   );
 }
