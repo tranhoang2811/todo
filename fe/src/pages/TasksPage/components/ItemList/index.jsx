@@ -2,7 +2,7 @@ import Item from "./components/Item/index.jsx";
 
 function ItemList() {
   return (
-    <div className="items-container">
+    <div className="items-list">
       <Item name={"test content"} key={123} />
     </div>
   );
