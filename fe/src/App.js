@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import TasksPage from "./pages/TasksPage/index.jsx";
+import { rootStore } from "./stores/rootStore.js";
+import { Provider } from "mobx-react";
 function App() {
   // const [items, setItems] = useState([]);
   // const [item, setItem] = useState("");
@@ -22,7 +24,10 @@ function App() {
   //     });
   // };
   return (
-    <TasksPage />
+    <Provider {...rootStore}>
+      <TasksPage />
+    </Provider>
+
     // Fix git
     // <div>
     //   <input
