@@ -1,4 +1,5 @@
-import { makeObservable, observable, action } from "mobx";
+import { makeObservable, observable, action, get } from "mobx";
+import { getTasks } from "../API/listing.js";
 
 export class TaskStore {
   tasks = [];
@@ -17,5 +18,11 @@ export class TaskStore {
 
   deleteTask(id) {
     this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
+
+  async fetchTaskList() {
+    const taskList = await getTasks();
+    console.log(taskList.data);
+    this.tasks = taskList.data;
   }
 }
