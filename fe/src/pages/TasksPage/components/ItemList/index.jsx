@@ -12,7 +12,7 @@ function ItemList() {
   return useObserver(() => (
     <div className="items-list">
       {taskStore.tasks.map((task) => {
-        return <Item name={task.name} key={task._id} />;
+        return <Item name={task.name} key={task._id} targetId={task._id} />;
       })}
     </div>
   ));
