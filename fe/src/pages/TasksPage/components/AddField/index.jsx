@@ -16,6 +16,7 @@ function AddField() {
         className="item-input"
         placeholder="What do you need to do today?"
         onChange={(e) => setItemContent(e.target.value)}
+        value={itemContent}
       />
       <button type="button" className="add-item-button" onClick={handleAddItem}>
         ADD

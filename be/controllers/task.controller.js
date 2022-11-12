@@ -33,7 +33,6 @@ function getTaskById(req, res) {
 
 function createTask(req, res) {
   const task = new Task(req.body);
-  console.log(req.body);
   task
     .save()
     .then((newTask) => {
