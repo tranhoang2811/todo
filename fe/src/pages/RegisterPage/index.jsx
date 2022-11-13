@@ -10,7 +10,7 @@ function RegisterPage() {
     <div className="register">
       <Header />
       <div className="register__description">
-        <InformationInput type={"fullname"} />
+        <InformationInput type={"fullName"} />
         <InformationInput type={"email"} />
         <InformationInput type={"password"} />
         <div className="age-and-gender">
