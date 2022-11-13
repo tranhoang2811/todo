@@ -3,7 +3,7 @@ import InformationInput from "./components/InformationInput/index.jsx";
 import ActionGroup from "./components/ActionGroup/index.jsx";
 import GenderInput from "./components/GenderInput/index.jsx";
 import AgeInput from "./components/AgeInput/index.jsx";
-// import "./style.css";
+import "./style.css";
 
 function RegisterPage() {
   return (
@@ -13,7 +13,7 @@ function RegisterPage() {
         <InformationInput type={"fullname"} />
         <InformationInput type={"email"} />
         <InformationInput type={"password"} />
-        <div class="age-and-gender">
+        <div className="age-and-gender">
           <GenderInput />
           <AgeInput />
         </div>
