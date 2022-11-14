@@ -3,8 +3,8 @@ function InformationInput(props) {
     <div className={`${props.type}-input`}>
       <div className="input-container">
         <label
-          for={`${props.type}`}
-          className={`${props.type}-icon ti-user input-icon`}
+          htmlFor={`${props.type}`}
+          className={`${props.type}-icon ${props.iconType} input-icon`}
         ></label>
         <input
           type="text"
