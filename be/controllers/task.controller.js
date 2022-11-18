@@ -12,10 +12,23 @@ const taskController = {
 function getAllTasks(req, res) {
   Task.find()
     .then((allTasks) => {
-      res.send(JSON.stringify(allTasks));
+      // res.send(JSON.stringify(allTasks));
+      res.status(200).send({
+        success: true,
+        message: "Complete get all tasks",
+        listTask: allTasks,
+      });
     })
     .catch((err) => {
-      handleError(err, "/controller/tasks.controller.js", "getAllTasks");
+      res.status(500).send({
+        success: false,
+        message: "Uncompleted",
+        error: handleError(
+          err,
+          "/controller/tasks.controller.js",
+          "getAllTasks"
+        ),
+      });
     });
 }
 
@@ -24,7 +37,11 @@ function getTaskById(req, res) {
   console.log(id);
   Task.findById(id)
     .then((task) => {
-      res.send(task);
+      res.send({
+        success: true,
+        message: "Complete get all tasks",
+        task: task,
+      });
     })
     .catch((err) => {
       handleError(err, "/controller/tasks.controller.js", "getTaskById");
@@ -36,7 +53,11 @@ function createTask(req, res) {
   task
     .save()
     .then((newTask) => {
-      res.send(newTask);
+      res.send({
+        success: true,
+        message: "Complete get all tasks",
+        task: newTask,
+      });
     })
     .catch((err) => {
       handleError(err, "/controller/tasks.controller.js", "createTask");
@@ -48,7 +69,11 @@ function updateTask(req, res) {
   Task.findByIdAndUpdate({ _id: id }, { $set: req.body })
     .exec()
     .then((task) => {
-      res.send(task);
+      res.send({
+        success: true,
+        message: "Complete get all tasks",
+        task: task,
+      });
     })
     .catch((err) => {
       handleError(err, "/controller/tasks.controller.js", "updateTask");
@@ -60,7 +85,11 @@ function deleteTask(req, res) {
   Task.findByIdAndDelete(id)
     .exec()
     .then((task) => {
-      res.send(task);
+      res.send({
+        success: true,
+        message: "Complete get all tasks",
+        task: task,
+      });
     })
     .catch((err) => {
       handleError(err, "/controller/tasks.controller.js", "deleteTask");
