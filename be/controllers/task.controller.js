@@ -1,5 +1,6 @@
 import Task from "../models/task.model.js";
 import handleError from "../helper.js";
+import User from "../models/user.model.js";
 
 const taskController = {
   getAllTasks,
@@ -10,58 +11,37 @@ const taskController = {
 };
 
 function getAllTasks(req, res) {
-  Task.find()
-    .then((allTasks) => {
-      // res.send(JSON.stringify(allTasks));
-      res.status(200).send({
-        success: true,
-        message: "Complete get all tasks",
-        listTask: allTasks,
-      });
+  const userId = req.user.id;
+  User.findById(userId)
+    .populate("tasks")
+    .then((user) => {
+      res.send(JSON.stringify(user.tasks));
     })
     .catch((err) => {
-      res.status(500).send({
-        success: false,
-        message: "Uncompleted",
-        error: handleError(
-          err,
-          "/controller/tasks.controller.js",
-          "getAllTasks"
-        ),
-      });
+      handleError(err, "/controller/tasks.controller.js", "getAllTasks");
     });
 }
 
 function getTaskById(req, res) {
   const id = req.params.id;
-  console.log(id);
   Task.findById(id)
     .then((task) => {
-      res.send({
-        success: true,
-        message: "Complete get all tasks",
-        task: task,
-      });
+      res.send(task);
     })
     .catch((err) => {
       handleError(err, "/controller/tasks.controller.js", "getTaskById");
     });
 }
 
-function createTask(req, res) {
-  const task = new Task(req.body);
-  task
-    .save()
-    .then((newTask) => {
-      res.send({
-        success: true,
-        message: "Complete get all tasks",
-        task: newTask,
-      });
-    })
-    .catch((err) => {
-      handleError(err, "/controller/tasks.controller.js", "createTask");
-    });
+async function createTask(req, res) {
+  try {
+    const newTask = await Task.create(req.body);
+    const userId = req.user.id;
+    await User.findByIdAndUpdate(userId, { $push: { tasks: newTask._id } });
+    return res.end(JSON.stringify(newTask));
+  } catch (err) {
+    handleError(err, "/controller/tasks.controller.js", "createTask");
+  }
 }
 
 function updateTask(req, res) {
@@ -69,11 +49,7 @@ function updateTask(req, res) {
   Task.findByIdAndUpdate({ _id: id }, { $set: req.body })
     .exec()
     .then((task) => {
-      res.send({
-        success: true,
-        message: "Complete get all tasks",
-        task: task,
-      });
+      res.send(task);
     })
     .catch((err) => {
       handleError(err, "/controller/tasks.controller.js", "updateTask");
@@ -85,11 +61,7 @@ function deleteTask(req, res) {
   Task.findByIdAndDelete(id)
     .exec()
     .then((task) => {
-      res.send({
-        success: true,
-        message: "Complete get all tasks",
-        task: task,
-      });
+      res.send(task);
     })
     .catch((err) => {
       handleError(err, "/controller/tasks.controller.js", "deleteTask");

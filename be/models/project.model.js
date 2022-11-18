@@ -11,14 +11,18 @@ const project = Schema({
     type: Boolean,
     require: true,
   },
-  tasks: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Task",
-  },
-  users: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
+  tasks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Task",
+    },
+  ],
+  users: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const Project = mongoose.model("Project", project);

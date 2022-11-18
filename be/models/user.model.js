@@ -31,14 +31,18 @@ const user = new Schema({
     type: String,
     require: false,
   },
-  projects: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Project",
-  },
-  tasks: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Task",
-  },
+  projects: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
+    },
+  ],
+  tasks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Task",
+    },
+  ],
 });
 
 const User = mongoose.model("User", user);
