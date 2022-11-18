@@ -1,7 +1,7 @@
-exports.handleError = function handleError(
-  error,
-  filePath = "",
-  functionName = ""
-) {
-  console.error(`${filePath} -> ${functionName} -> Error:`, error);
+const handleError = (error, filePath = "", functionName = "") => {
+  console.error(
+    `Path: ${filePath} -> Function Name: ${functionName} -> Error: ${error}`
+  );
 };
+
+export default handleError;
