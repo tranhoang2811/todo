@@ -1,5 +1,5 @@
 import Task from "../models/task.model.js";
-// import { handleError } from "../helper.js";
+import handleError from "../helper.js";
 
 const taskController = {
   getAllTasks,
@@ -15,7 +15,7 @@ function getAllTasks(req, res) {
       res.send(JSON.stringify(allTasks));
     })
     .catch((err) => {
-      console.log(err, "/controller/tasks.controller.js", "getAllTasks");
+      handleError(err, "/controller/tasks.controller.js", "getAllTasks");
     });
 }
 
@@ -27,7 +27,7 @@ function getTaskById(req, res) {
       res.send(task);
     })
     .catch((err) => {
-      console.log(err, "/controller/tasks.controller.js", "getTaskById");
+      handleError(err, "/controller/tasks.controller.js", "getTaskById");
     });
 }
 
@@ -39,7 +39,7 @@ function createTask(req, res) {
       res.send(newTask);
     })
     .catch((err) => {
-      console.log(err, "/controller/tasks.controller.js", "createTask");
+      handleError(err, "/controller/tasks.controller.js", "createTask");
     });
 }
 
@@ -51,7 +51,7 @@ function updateTask(req, res) {
       res.send(task);
     })
     .catch((err) => {
-      console.log(err, "/controller/tasks.controller.js", "updateTask");
+      handleError(err, "/controller/tasks.controller.js", "updateTask");
     });
 }
 
@@ -63,7 +63,7 @@ function deleteTask(req, res) {
       res.send(task);
     })
     .catch((err) => {
-      console.log(err, "/controller/tasks.controller.js", "deleteTask");
+      handleError(err, "/controller/tasks.controller.js", "deleteTask");
     });
 }
 
