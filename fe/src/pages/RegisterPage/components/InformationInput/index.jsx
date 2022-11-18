@@ -1,4 +1,11 @@
+import { useState } from "react";
+import { useStores } from "../../../../context/rootStoreContext.js";
+
+
 function InformationInput(props) {
+  const { userStore } = useStores();
+  // const [input, setInput] = useState("");
+
   return (
     <div className={`${props.type}-input`}>
       <div className="input-container">
@@ -11,6 +18,8 @@ function InformationInput(props) {
           id={`${props.type}`}
           className="input-information"
           placeholder={props.type[0].toUpperCase() + props.type.substring(1)}
+          onChange = {(e) => props.setInput(e.target.value)}
+          // value = {input}
         />
       </div>
     </div>
