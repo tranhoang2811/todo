@@ -1,4 +1,4 @@
-import Router from "./Router/index.jsx";
+import Router from "./router/index.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { rootStore } from "./stores/rootStore.js";
 import { Provider } from "mobx-react";

@@ -4,7 +4,7 @@ import { useState } from "react";
 function AddField() {
   const { taskStore } = useStores();
   const [itemContent, setItemContent] = useState("");
-  const handleAddItem = () => {
+  function handleAddItem() {
     taskStore.addTask(itemContent);
     setItemContent("");
   };
@@ -12,10 +12,9 @@ function AddField() {
   return (
     <div className="add-item-container">
       <input
-        type="text"
         className="item-input"
         placeholder="What do you need to do today?"
-        onChange={(e) => setItemContent(e.target.value)}
+        onChange={(event) => setItemContent(event.target.value)}
         value={itemContent}
       />
       <button type="button" className="add-item-button" onClick={handleAddItem}>

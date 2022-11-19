@@ -18,13 +18,12 @@ export class TaskStore {
   }
 
   async addTask(name) {
-    const response = await createTask(name);
-    this.tasks.push(response.data);
+    await createTask(name);
+    await this.fetchTaskList();
   }
 
   async removeTask(id) {
-    const response = await deleteTask(id);
-    this.tasks = this.tasks.filter((task) => task._id !== response.data._id);
-    console.log(this.tasks);
+    await deleteTask(id);
+    await this.fetchTaskList();
   }
 }

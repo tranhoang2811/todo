@@ -1,6 +1,6 @@
 import Item from "./components/Item/index.jsx";
 import { useStores } from "../../../../context/rootStoreContext.js";
-import { useObserver } from "mobx-react";
+import { observer } from "mobx-react";
 import { useEffect } from "react";
 
 function ItemList() {
@@ -9,13 +9,14 @@ function ItemList() {
     taskStore.fetchTaskList();
   }, []);
 
-  return useObserver(() => (
+  return ( 
     <div className="items-list">
-      {taskStore.tasks.map((task) => {
+      // check array before
+      { Array.isArray(taskStore?.tasks) && taskStore?.tasks.map((task) => {
         return <Item name={task.name} key={task._id} targetId={task._id} />;
       })}
     </div>
-  ));
+  );
 }
 
-export default ItemList;
+export default observer(ItemList);

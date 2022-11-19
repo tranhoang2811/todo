@@ -4,7 +4,7 @@ import { useStores } from "../../../../../../context/rootStoreContext.js";
 function Item(props) {
   const { taskStore } = useStores();
 
-  const handleDeleteTask = () => {
+  function handleDeleteTask() {
     taskStore.removeTask(props.targetId);
   };
 
