@@ -9,31 +9,31 @@ skinparam linetype ortho
 entity Project {
     *_id: ObjectId
     --
-    *name: String
-    *isDone: Boolean
-    *tasks: ObjectId[]
-    *users: ObjectId[]
+    name: String
+    isDone: Boolean
+    tasks: ObjectId[]
+    users: ObjectId[]
 }
 
 entity Task {
     *_id: ObjectId
     --
-    *name: String
-    *isDone: Boolean
+    name: String
+    isDone: Boolean
 }
 
 entity User {
     *_id: ObjectId
     --
-    *name: String
-    *email: String
-    *password: String
-    *isMale: Boolean
-    *age: Number
-    *role: String
-    *imagePath: String
-    *projects: ObjectId[]
-    *tasks: ObjectId[]
+    name: String
+    email: String
+    password: String
+    isMale: Boolean
+    age: Number
+    role: String
+    imagePath: String
+    projects: ObjectId[]
+    tasks: ObjectId[]
 }
 
 User ||--|{ Task
