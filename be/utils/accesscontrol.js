@@ -18,6 +18,6 @@ const grantArray = [
   { role: "admin", resource: "task", action: "delete:own", attributes: "*" },
 ];
 
-const ac = new AccessControl(grantArray);
+const accessControl = new AccessControl(grantArray);
 
-export default ac;
+export default accessControl;

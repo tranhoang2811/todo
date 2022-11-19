@@ -12,6 +12,6 @@ export class UserStore {
   }
   async register(fullName, email, password, isMale, age, role) {
     const res = await register(fullName, email, password, isMale, age, role);
-    this.user = res.data;
+    this.user = response.data;
   }
 }
