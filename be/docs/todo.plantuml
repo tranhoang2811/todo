@@ -30,10 +30,15 @@ entity User {
     password: String
     isMale: Boolean
     age: Number
-    role: String
+    role: Role
     imagePath: String
     projects: ObjectId[]
     tasks: ObjectId[]
+}
+
+Enum Role {
+    +employee: String
+    +admin: String
 }
 
 User ||--|{ Task

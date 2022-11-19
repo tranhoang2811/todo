@@ -7,20 +7,20 @@ const projectController = {
   updateProject,
 };
 
-async function getAllProjects(req, res) {
+async function getAllProjects(request, response) {
   const projects = await Project.find();
-  return res.end(JSON.stringify(projects));
+  return response.end(JSON.stringify(projects));
 }
 
-function createProject(req, res) {
-  Project.create(req.body);
-  return res.end("Create new project successfully");
+function createProject(request, response) {
+  Project.create(request.body);
+  return response.end("Create new project successfully");
 }
 
-async function updateProject(req, res) {
-  const projectId = req.params.id;
+async function updateProject(request, response) {
+  const projectId = request.params.id;
   const updatedProject = await Project.findByIdAndUpdate(projectId);
-  return res.end(JSON.stringify(updatedProject));
+  return response.end(JSON.stringify(updatedProject));
 }
 
 export default projectController;

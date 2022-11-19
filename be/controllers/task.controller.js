@@ -1,5 +1,5 @@
 import Task from "../models/task.model.js";
-import handleError from "../helper.js";
+import handleError from "../utils/handleError.js";
 import User from "../models/user.model.js";
 
 const taskController = {
@@ -10,17 +10,17 @@ const taskController = {
   deleteTask,
 };
 
-async function getAllTasks(req, res) {
-  const userId = req.user.id;
+async function getAllTasks(request, response) {
+  const userId = request.user.id;
   try {
     const user = await User.findById(userId).populate("tasks");
-    return res.status(200).send({
+    return response.status(200).send({
       success: true,
       message: "Complete get all tasks",
       tasks: user.tasks,
     });
   } catch (err) {
-    res.status(500).send({
+    response.status(500).send({
       success: false,
       message: "Uncompleted",
       error: handleError(err, "/controller/tasks.controller.js", "getAllTasks"),
@@ -28,29 +28,29 @@ async function getAllTasks(req, res) {
   }
 }
 
-function getTaskById(req, res) {
-  const id = req.params.id;
+function getTaskById(request, response) {
+  const id = request.params.id;
   Task.findById(id)
     .then((task) => {
-      res.send(task);
+      response.send(task);
     })
     .catch((err) => {
       handleError(err, "/controller/tasks.controller.js", "getTaskById");
     });
 }
 
-async function createTask(req, res) {
+async function createTask(request, response) {
   try {
-    const newTask = await Task.create(req.body);
-    const userId = req.user.id;
+    const newTask = await Task.create(request.body);
+    const userId = request.user.id;
     await User.findByIdAndUpdate(userId, { $push: { tasks: newTask._id } });
-    return res.status(200).send({
+    return response.status(200).send({
       success: true,
       message: "Complete create task",
       task: newTask,
     });
   } catch (err) {
-    res.status(500).send({
+    response.status(500).send({
       success: false,
       message: "Uncompleted",
       error: handleError(err, "/controller/tasks.controller.js", "createTask"),
@@ -58,20 +58,20 @@ async function createTask(req, res) {
   }
 }
 
-async function updateTask(req, res) {
-  const id = req.params.id;
+async function updateTask(request, response) {
+  const id = request.params.id;
   try {
     const updatedTask = await Task.findByIdAndUpdate(
       { _id: id },
-      { $set: req.body }
+      { $set: request.body }
     );
-    return res.status(200).send({
+    return response.status(200).send({
       success: true,
       message: "Complete update task",
       task: updatedTask,
     });
   } catch (err) {
-    res.status(500).send({
+    response.status(500).send({
       success: false,
       message: "Uncompleted",
       error: handleError(err, "/controller/tasks.controller.js", "updateTask"),
@@ -79,19 +79,19 @@ async function updateTask(req, res) {
   }
 }
 
-async function deleteTask(req, res) {
-  const id = req.params.id;
+async function deleteTask(request, response) {
+  const id = request.params.id;
   try {
-    const userId = req.user.id;
+    const userId = request.user.id;
     const deletedTask = await Task.findByIdAndDelete(id);
     await User.findByIdAndUpdate(userId, { $pull: { tasks: id } });
-    return res.status(200).send({
+    return response.status(200).send({
       success: true,
       message: "Complete delete task",
       task: deletedTask,
     });
   } catch (err) {
-    res.status(500).send({
+    response.status(500).send({
       success: false,
       message: "Uncompleted",
       error: handleError(err, "/controller/tasks.controller.js", "deleteTask"),
