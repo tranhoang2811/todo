@@ -19,7 +19,7 @@ async function getAllTasks(req, res) {
       message: "Complete get all tasks",
       tasks: user.tasks,
     });
-  } catch (error) {
+  } catch (err) {
     res.status(500).send({
       success: false,
       message: "Uncompleted",
@@ -70,7 +70,7 @@ async function updateTask(req, res) {
       message: "Complete update task",
       task: updatedTask,
     });
-  } catch (error) {
+  } catch (err) {
     res.status(500).send({
       success: false,
       message: "Uncompleted",
@@ -90,11 +90,11 @@ async function deleteTask(req, res) {
       message: "Complete delete task",
       task: deletedTask,
     });
-  } catch (error) {
+  } catch (err) {
     res.status(500).send({
       success: false,
       message: "Uncompleted",
-      error: handleError(err, "/controller/tasks.controller.js", "getAllTasks"),
+      error: handleError(err, "/controller/tasks.controller.js", "deleteTask"),
     });
   }
 }
